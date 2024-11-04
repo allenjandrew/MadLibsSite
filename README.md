@@ -2,7 +2,9 @@
 
 **Project Title**: MadLibsSite
 
-**Project Description**: A MadLibs website where a user is prompted to input words which are then used to create silly sentences.
+**Project Description**:
+
+A MadLibs website where a user is prompted to input words which are then used to create silly sentences.
 
 **Project Goals**:
 

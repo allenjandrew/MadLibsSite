@@ -1,6 +1,6 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import WordEntry from "./components/WordEntry";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Display from "./components/Display";
 import * as intf from "./scripts/interfaces";
 // import * as func from "./scripts/functions";
@@ -12,6 +12,11 @@ interface MadLibPageProps {
 }
 
 const MadLibPage = (p: MadLibPageProps) => {
+  const navigate = useNavigate();
+  const goHome = () => {
+    navigate("/");
+  };
+
   const { id } = useParams();
   const idn = Number(id);
 
@@ -19,6 +24,12 @@ const MadLibPage = (p: MadLibPageProps) => {
   const [values, setValues] = useState<string[]>([]);
   const [showSentence, setShowSentence] = useState(Boolean(p.filled[idn]));
   const [showErrorAnnouncement, setShowErrorAnnouncement] = useState(false);
+
+  useEffect(() => {
+    if (!id || idn >= p.data.length || idn < 0 || !madlib) {
+      goHome();
+    }
+  });
 
   const Wrong = () => {
     return (
@@ -61,6 +72,7 @@ const MadLibPage = (p: MadLibPageProps) => {
   const madlib = p.data[idn];
 
   if (!madlib) {
+    goHome();
     return Wrong();
   }
 
